@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaNova - Marine Data Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1 class="brand-title" data-translate="brand">AquaNova</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active" data-translate="nav-home">Home</a>
+                <a href="chatbot.html" class="nav-link" data-translate="nav-chatbot">Chatbot</a>
+                <a href="login.html" class="nav-link active" data-translate="nav-login">Login/SignUp</a>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <select class="language-selector" id="languageSelector" aria-label="Select language">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Animated Ocean Background -->
+    <div class="ocean-background">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner">
+        <div class="hero-content">
+            <h2 class="hero-title" data-translate="hero-title">
+                A single, intelligent platform for oceanographic, fisheries, and eDNA data
+            </h2>
+            <p class="hero-subtitle" data-translate="hero-subtitle">
+                Streamline your marine research with automated data processing, validation, and visualization tools
+            </p>
+            <div class="hero-actions">
+                <a href="chatbot.html" class="cta-button primary" data-translate="cta-primary">
+                    Start Exploring
+                </a>
+                <button class="cta-button secondary" data-translate="cta-secondary">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-elements">
+                <div class="float-element fish">🐟</div>
+                <div class="float-element coral">🪸</div>
+                <div class="float-element wave-icon">🌊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" role="main">
+        <div class="container">
+            <h2 class="section-title" data-translate="features-title">Platform Features</h2>
+            <div class="features-grid">
+                
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title" data-translate="feature1-title">Auto Data Import & Format Checker</h3>
+                    <p class="feature-description" data-translate="feature1-desc">
+                        Files are automatically converted to Darwin Core/OBIS standards with comprehensive validation and error detection.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title" data-translate="feature2-title">Visual Dashboard</h3>
+                    <p class="feature-description" data-translate="feature2-desc">
+                        Interactive heatmaps, time-series graphs, and geographic visualizations for comprehensive data analysis.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">🐠</div>
+                    <h3 class="feature-title" data-translate="feature3-title">Fish Identification</h3>
+                    <p class="feature-description" data-translate="feature3-desc">
+                        Advanced otolith recognition combined with eDNA analysis for accurate species identification.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">🌐</div>
+                    <h3 class="feature-title" data-translate="feature4-title">Multi-lingual Support</h3>
+                    <p class="feature-description" data-translate="feature4-desc">
+                        Complete UI and chatbot support in English and Hindi, with seamless language switching.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">⚙️</div>
+                    <h3 class="feature-title" data-translate="feature5-title">Developer Tools & Modular Design</h3>
+                    <p class="feature-description" data-translate="feature5-desc">
+                        Built-in API documentation and modular components for easy integration and customization.
+                    </p>
+                </div>
+
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">✅</div>
+                    <h3 class="feature-title" data-translate="feature6-title">Data Validation & Error Fixing</h3>
+                    <p class="feature-description" data-translate="feature6-desc">
+                        Built-in rules automatically detect and correct common errors while maintaining data integrity.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+        <!-- Darwin Core / OBIS Converter -->
+<section class="converter" id="converter" role="region">
+  <div class="container">
+    <h2 class="section-title">Upload & Convert to Darwin Core/OBIS</h2>
+    <form id="uploadForm" class="upload-form">
+      <input type="file" id="dataFile" accept=".csv,.xlsx" required />
+      <button type="submit" class="upload-btn">Upload & Convert</button>
+    </form>
+    <div id="result" class="result-box" aria-live="polite"></div>
+  </div>
+</section>
+
+<!-- Visualization & Analytics Dashboard -->
+<section class="dashboard" id="dashboard" role="region">
+  <div class="container">
+    <h2 class="section-title">Visual Dashboard</h2>
+
+    <!-- Filter Controls -->
+    <div class="filter-bar">
+      <label>
+        Region:
+        <select id="regionFilter">
+          <option value="all">All</option>
+          <option value="Pacific">Pacific</option>
+          <option value="Atlantic">Atlantic</option>
+        </select>
+      </label>
+      <label>
+        Season:
+        <select id="seasonFilter">
+          <option value="all">All</option>
+          <option value="summer">Summer</option>
+          <option value="winter">Winter</option>
+        </select>
+      </label>
+      <label>
+        Species:
+        <select id="speciesFilter">
+          <option value="all">All</option>
+          <option value="tuna">Tuna</option>
+          <option value="salmon">Salmon</option>
+        </select>
+      </label>
+      <button id="downloadReport" class="report-btn">Export Report</button>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-grid">
+      <canvas id="heatmapChart"></canvas>
+      <canvas id="timeSeriesChart"></canvas>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+
+
+    <!-- Wave Divider -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+            <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+            <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+        </svg>
+    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AquaNova Data Visualization</title>
+  <link rel="stylesheet" href="charts.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Marine Data Analytics</h1>
+    <p>Interactive bar and pie charts powered by Chart.js</p>
+  </header>
+
+  <main class="chart-container">
+    <section class="chart-box">
+      <h2>Species Observation Counts</h2>
+      <canvas id="speciesBarChart"></canvas>
+    </section>
+
+    <section class="chart-box">
+      <h2>Distribution by Ocean Region</h2>
+      <canvas id="regionPieChart"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 AquaNova</p>
+  </footer>
+
+  <script src="charts.js"></script>
+</body>
+</html>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-translate="footer-about">About AquaNova</h3>
+                    <p data-translate="footer-desc">
+                        Empowering marine researchers with intelligent data management and analysis tools.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-links">Quick Links</h3>
+                    <ul>
+                        <li><a href="#" data-translate="footer-docs">Documentation</a></li>
+                        <li><a href="#" data-translate="footer-api">API Reference</a></li>
+                        <li><a href="chatbot.html" data-translate="footer-support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-contact">Contact</h3>
+                    <p>info@aquanova.org</p>
+                    <p data-translate="footer-community">Join our marine data community</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AquaNova. <span data-translate="footer-rights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
